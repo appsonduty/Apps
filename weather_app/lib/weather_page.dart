@@ -1,6 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+
 
 
 // DONT CHANGE THIS VALUE \\
@@ -92,27 +94,64 @@ class _WeatherPageState extends State<WeatherPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey.shade100,
       appBar: AppBar(
-        title: Text("WeatherApp", style: TextStyle(color: Colors.white)),
+        backgroundColor: Colors.grey.shade800,
+        title: Center(child: Text("Weather Up", style: TextStyle(color: Colors.white))),
       ),
-      body: Container(
-        padding: EdgeInsets.all(15),
-        height: MediaQuery.of(context).size.height * 0.4,
+      body: SingleChildScrollView(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            Container(
+
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(20),
                 child: TextField(
-              decoration: InputDecoration(labelText: "Location"),
-              controller: _locationController,
-            )),
-            FloatingActionButton(
-                onPressed: () => _enterLocation(context),
-                child: Icon(Icons.search))
-          ],
-        ),
+
+                 decoration: InputDecoration(labelText: 'Enter your Location',
+                     labelStyle: TextStyle(color: Colors.blueGrey.shade800,
+                     fontSize: 20
+                     ),
+                     border: OutlineInputBorder(
+                       borderRadius: BorderRadius.all(Radius.circular(12.0))
+                     ),
+                   
+                      
+                      ),
+                   controller: _locationController,
+              ),
+              ),
+              SizedBox(height: 20,),
+              Container(
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(150,0,0,0),
+                  child: Row(
+                    children: <Widget>[
+                      Text(
+                        'Go!',
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.blue.shade900
+                        ),
+                      ),
+                      SizedBox(width: 10,),
+                      FloatingActionButton(
+                          onPressed: () => _enterLocation(context),
+                          child: Icon(Icons.wb_cloudy),),
+
+                    ],
+                  ),
+                ),
+              ),
+              SizedBox(height: 40,),
+              Image.asset('images/Image1.png',
+              width: 300,
+              height: 250,
+              ),
+
+            ],
+          ),
       ),
+      );
       
-    );
   }
 }
