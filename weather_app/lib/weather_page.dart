@@ -30,13 +30,14 @@ class _WeatherPageState extends State<WeatherPage> {
       if(response.body.isNotEmpty) {
       String data = response.body;
       decodedData = jsonDecode(data);
+      // double temperature = decodedData['main']['temp'] - 273.15;
       }
 
     // EXTRACT WHATEVER DATA YOU NEED FROM HERE \\
 
       // return decodedData;
       // String weatherDescription = decodedData['weather'][0]['description'];
-      // double temperature = decodedData['main']['temp'] - 273.15;
+      
       // double minTemperature = decodedData['main']['temp_min'] - 273.15;
       // double maxTemperature = decodedData['main']['temp_min'] - 273.15;
       // String cityName = decodedData['name'];
@@ -73,7 +74,7 @@ class _WeatherPageState extends State<WeatherPage> {
                             fontSize: 25, fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        (decodedData['main']['temp'] - 273.15).toString(),
+                        ("${(decodedData['main']['temp'] - 273.15).toStringAsFixed(2)}"),
                         style: TextStyle(
                             fontSize: 25, fontWeight: FontWeight.bold),
                       )
