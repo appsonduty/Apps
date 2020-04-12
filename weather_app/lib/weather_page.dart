@@ -50,6 +50,8 @@ class _WeatherPageState extends State<WeatherPage> {
     }
     setState(() {
       showModalBottomSheet(
+
+        backgroundColor: Colors.grey.shade100,
           context: ctx,
           builder: (_) {
             return GestureDetector(
@@ -59,7 +61,9 @@ class _WeatherPageState extends State<WeatherPage> {
                 // decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
                 height: MediaQuery.of(ctx).size.height * 0.3,
                 child: Center(
+
                   child: Column(
+
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       Card(
