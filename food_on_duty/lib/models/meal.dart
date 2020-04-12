@@ -32,5 +32,6 @@ class Meal {
       @required this.isVegetarian,
       @required this.id,
       @required this.categories,
-      @required this.title});
+      @required this.title
+      });
 }
