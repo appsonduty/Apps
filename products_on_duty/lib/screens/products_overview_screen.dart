@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../screens/cart_screen.dart';
 import '../widgets/app_drawer.dart';
 import 'package:provider/provider.dart';
-// import '../providers/products_provider.dart';
+import '../providers/products_provider.dart';
 import '../widgets/product_grid.dart';
 import '../widgets/badge.dart';
 import '../providers/cart.dart';
@@ -16,6 +16,33 @@ class ProductsOverviewScreen extends StatefulWidget {
 
 class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
   var _showOnlyFavorites = false;
+  var _isInit = true;
+  var _isLoading = false;
+  @override
+  void initState() {
+    // Provider.of<ProductsProvider>(context).fetchAndSetProducts();  wont work
+    // Future.delayed(Duration.zero).then((_) {
+    //   Provider.of<ProductsProvider>(context).fetchAndSetProducts();
+
+    // } );
+    super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    if (_isInit) {
+      _isLoading = true;
+      Provider.of<ProductsProvider>(context).fetchAndSetProducts().then((_) {
+        setState(() {
+          _isLoading = false;
+        });
+      });
+    }
+    _isInit = false;
+
+    super.didChangeDependencies();
+  }
+
   @override
   Widget build(BuildContext context) {
     // final productsContainer =
@@ -24,14 +51,17 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
       appBar: AppBar(
         title: Text("ProdsOnDuty"),
         // leading: AppDrawer(),
-        
+
         actions: <Widget>[
-          
           Consumer<Cart>(
-            builder: (_, cartData, child_1) =>
-                Badge(child: child_1, value: cartData.itemCount.toString(), color: Colors.orangeAccent,),
-            child:
-                IconButton(icon: Icon(Icons.shopping_cart), onPressed: () {
+            builder: (_, cartData, child_1) => Badge(
+              child: child_1,
+              value: cartData.itemCount.toString(),
+              color: Colors.orangeAccent,
+            ),
+            child: IconButton(
+                icon: Icon(Icons.shopping_cart),
+                onPressed: () {
                   Navigator.of(context).pushNamed(CartScreen.routeName);
                 }),
           ),
@@ -64,7 +94,11 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
         ],
       ),
       drawer: AppDrawer(),
-      body: ProductGrid(_showOnlyFavorites),
+      body: _isLoading
+          ? Center(
+              child: CircularProgressIndicator(),
+            )
+          : ProductGrid(_showOnlyFavorites),
     );
   }
 }
