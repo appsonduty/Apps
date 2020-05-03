@@ -18,15 +18,15 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
   var _showOnlyFavorites = false;
   var _isInit = true;
   var _isLoading = false;
-  @override
-  void initState() {
-    // Provider.of<ProductsProvider>(context).fetchAndSetProducts();  wont work
-    // Future.delayed(Duration.zero).then((_) {
-    //   Provider.of<ProductsProvider>(context).fetchAndSetProducts();
+  // @override
+  // void initState() {
+  //   // Provider.of<ProductsProvider>(context).fetchAndSetProducts();  wont work
+  //   // Future.delayed(Duration.zero).then((_) {
+  //   //   Provider.of<ProductsProvider>(context).fetchAndSetProducts();
 
-    // } );
-    super.initState();
-  }
+  //   // } );
+  //   super.initState();
+  // }
 
   @override
   void didChangeDependencies() {
